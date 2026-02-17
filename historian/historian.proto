@@ -1,0 +1,222 @@
+syntax = "proto3";
+
+import "google/protobuf/empty.proto";
+import "google/protobuf/timestamp.proto";
+import "google/protobuf/struct.proto";
+
+option go_package = "github.com/factrylabs/historian-proto/historian;historian";
+
+package proto;
+
+// https://developers.google.com/protocol-buffers/docs/proto3
+
+// The historian service definition.
+// CollectorUUID gets passed in the header
+service Historian {
+  rpc GetCollector (google.protobuf.Empty) returns (Collector);
+  rpc RegisterCollector (RegisterCollectorSchema) returns (Collector);
+
+  rpc CreatePointsStream (stream Points) returns (CreatePointsReply);
+  rpc CreatePoints (Points) returns (CreatePointsReply);
+
+  rpc GetMeasurements (MeasurementRequest) returns (Measurements);
+  rpc CreateMeasurements (CreateMeasurementsRequest) returns (CreateMeasurementsReply);
+
+  rpc CreateLogsStream (stream Logs) returns (CreateLogsReply);
+  rpc CreateLogs (Logs) returns (CreateLogsReply);
+
+  rpc CreateStatisticsStream (stream Statistics) returns (CreateStatisticsReply);
+  rpc CreateStatistics (Statistics) returns (CreateStatisticsReply);
+
+  rpc GetCollectorUpdate (CollectorUpdateMetadata) returns (stream File);
+
+  rpc UpdateCollectorState(google.protobuf.Struct) returns (google.protobuf.Empty);
+  rpc UpdateHealth(HealthUpdates) returns (HealthUpdateReply);
+
+  rpc MigrateSettings(MigrationRequest) returns (google.protobuf.Empty);
+
+  rpc GetInfo (google.protobuf.Empty) returns (HistorianInfo);
+}
+
+message CollectorHA {
+  string mainCollectorUUID = 1;
+  string host = 2;
+  int32 healthPort = 3;
+  int32 timeout = 4;
+  int32 stopDelay = 5;
+}
+
+message Collector {
+  string uuid = 1;
+  string type = 2;
+  string buildversion = 3;
+  string description = 4;
+  string status = 5;
+  google.protobuf.Struct settings = 6;
+  CollectorHA haSettings = 7;
+  string buildOs=8;
+  string buildArch=9;
+  bool updateAvailable=10;
+  string updateToVersion=11;
+  google.protobuf.Struct state = 12;
+}
+
+message RegisterCollectorSchema {
+  string collectorType = 1;
+  string buildVersion = 2;
+  google.protobuf.Struct measurementSettingsSchema = 3;
+  google.protobuf.Struct settingsSchema = 4;
+  string buildOs = 5;
+  string buildArch = 6;
+}
+
+message Point {
+  string measurementUUID = 1;
+  google.protobuf.Timestamp timestamp = 2;
+  google.protobuf.Value value = 3;
+  string status = 4;
+  google.protobuf.Struct tags = 5;
+}
+
+// Used to send batches of points over the stream and to marshal a batch of points to file
+message Points {
+  repeated Point points = 1;
+}
+
+// Provide an empty message instead of using default empty message if we want to add
+// something in the future
+message CreatePointsReply {}
+
+message Measurement {
+  string uuid = 1;
+  string name = 2;
+  string status = 3;
+  google.protobuf.Timestamp createdAt = 4;
+  google.protobuf.Timestamp updatedAt = 5;
+  google.protobuf.Struct settings = 6;
+  string datatype = 7;
+  EngineeringSpecs engineeringSpecs = 8;
+}
+
+message EngineeringSpecs {
+  optional string uom = 1;
+  optional double valueMin = 2;
+  optional double valueMax = 3;
+  optional double limitLo = 4;
+  optional double limitHi = 5;
+}
+
+message MeasurementRequest {
+  google.protobuf.Timestamp since = 1;
+  string collectorUUID = 2;
+}
+
+message Measurements {
+  repeated Measurement measurements = 1;
+}
+
+message Log {
+  google.protobuf.Struct message = 1;
+  enum Level {
+    PANIC = 0;
+    FATAL = 1;
+    ERROR = 2;
+    WARNING = 3;
+    INFO = 4;
+    DEBUG = 5;
+    TRACE = 6;
+  }
+  Level level = 2;
+  google.protobuf.Timestamp timestamp = 3;
+  string health = 4 [deprecated = true];
+  string measurementUUID = 5;
+}
+
+message Logs {
+  repeated Log logs = 1;
+}
+
+message CreateLogsReply {}
+
+message Statistics {
+  // System statistics
+  double systemUptime = 1; // As time.Duration seconds
+  double systemCPUUsage = 2;
+  double systemMemoryUsage = 3;
+  int64 systemFreeDiskSpace = 4;
+
+  // Collector statistics
+  double collectorUptime = 5; // As time.Duration seconds
+  int64 collectorPointsSent = 6;
+  int64 collectorGoodPoints = 7;
+  int64 collectorBadPoints = 8;
+
+  // Buffer statistics
+  int64 bufferCurrentSize = 9;
+  int64 bufferDiskFlushes = 10;
+  int64 bufferErrorFiles = 11;
+
+  // Other statistics
+  google.protobuf.Struct other = 12;
+
+  google.protobuf.Timestamp timestamp = 13;
+
+  // Extra system statistics
+  int64 systemTotalDiskSpace = 14;
+  int64 systemMemoryFree = 15;
+  int64 systemMemoryTotal = 16;
+}
+
+message CreateStatisticsReply {}
+
+message CreateMeasurementsReply {}
+
+message CreateMeasurement {
+  string name = 1;
+  optional string dataType = 2;
+  optional string description = 3;
+  bool autoOnboard = 4;
+  optional google.protobuf.Struct attributes = 5;
+  optional google.protobuf.Struct settings = 6;
+}
+
+message CreateMeasurementsRequest {
+  repeated CreateMeasurement measurements = 1;
+}
+
+message CollectorUpdateMetadata{
+ string product =1;
+ string version=2;
+ string os = 3;
+ string arch=4;
+}
+
+message File {
+  bytes chunk=1;
+}
+
+message MigrateMeasurementSettings {
+  string measurementUUID = 1;
+  google.protobuf.Struct settings = 2;
+}
+
+message MigrationRequest {
+  google.protobuf.Struct settings = 1;
+  repeated MigrateMeasurementSettings measurementSettings = 2;
+}
+
+message HistorianInfo {
+  string version = 1;
+  string apiVersion = 2;
+}
+
+message HealthUpdates {
+  repeated HealthUpdate healthUpdates = 1;
+}
+
+message HealthUpdate {
+  string health = 1;
+  google.protobuf.Timestamp timestamp = 2;
+}
+
+message HealthUpdateReply {}
