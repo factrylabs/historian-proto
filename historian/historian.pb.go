@@ -2715,6 +2715,66 @@ func (x *AssetProperties) GetAssetProperties() []*AssetProperty {
 	return nil
 }
 
+type Pagination struct {
+	state         protoimpl.MessageState `protogen:"open.v1"`
+	Limit         *int64                 `protobuf:"varint,1,opt,name=limit,proto3,oneof" json:"limit,omitempty"`   // limit is the maximum number of results to return, default is 100 if not provided
+	Offset        *int64                 `protobuf:"varint,2,opt,name=offset,proto3,oneof" json:"offset,omitempty"` // offset is the number of results to skip before starting to return results
+	Page          *int64                 `protobuf:"varint,3,opt,name=page,proto3,oneof" json:"page,omitempty"`     // page is the page number to return, calculated as offset/limit + 1. If page is provided, offset is ignored
+	unknownFields protoimpl.UnknownFields
+	sizeCache     protoimpl.SizeCache
+}
+
+func (x *Pagination) Reset() {
+	*x = Pagination{}
+	mi := &file_historian_historian_proto_msgTypes[39]
+	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+	ms.StoreMessageInfo(mi)
+}
+
+func (x *Pagination) String() string {
+	return protoimpl.X.MessageStringOf(x)
+}
+
+func (*Pagination) ProtoMessage() {}
+
+func (x *Pagination) ProtoReflect() protoreflect.Message {
+	mi := &file_historian_historian_proto_msgTypes[39]
+	if x != nil {
+		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
+		if ms.LoadMessageInfo() == nil {
+			ms.StoreMessageInfo(mi)
+		}
+		return ms
+	}
+	return mi.MessageOf(x)
+}
+
+// Deprecated: Use Pagination.ProtoReflect.Descriptor instead.
+func (*Pagination) Descriptor() ([]byte, []int) {
+	return file_historian_historian_proto_rawDescGZIP(), []int{39}
+}
+
+func (x *Pagination) GetLimit() int64 {
+	if x != nil && x.Limit != nil {
+		return *x.Limit
+	}
+	return 0
+}
+
+func (x *Pagination) GetOffset() int64 {
+	if x != nil && x.Offset != nil {
+		return *x.Offset
+	}
+	return 0
+}
+
+func (x *Pagination) GetPage() int64 {
+	if x != nil && x.Page != nil {
+		return *x.Page
+	}
+	return 0
+}
+
 type GetMeasurementsByFilterRequest struct {
 	state               protoimpl.MessageState `protogen:"open.v1"`
 	Keyword             *string                `protobuf:"bytes,1,opt,name=keyword,proto3,oneof" json:"keyword,omitempty"`
@@ -2727,13 +2787,14 @@ type GetMeasurementsByFilterRequest struct {
 	Datatypes           []string               `protobuf:"bytes,8,rep,name=datatypes,proto3" json:"datatypes,omitempty"`
 	ExcludeCalculations *bool                  `protobuf:"varint,9,opt,name=excludeCalculations,proto3,oneof" json:"excludeCalculations,omitempty"`
 	IncludeDependencies *bool                  `protobuf:"varint,10,opt,name=includeDependencies,proto3,oneof" json:"includeDependencies,omitempty"`
+	Pagination          *Pagination            `protobuf:"bytes,11,opt,name=pagination,proto3,oneof" json:"pagination,omitempty"`
 	unknownFields       protoimpl.UnknownFields
 	sizeCache           protoimpl.SizeCache
 }
 
 func (x *GetMeasurementsByFilterRequest) Reset() {
 	*x = GetMeasurementsByFilterRequest{}
-	mi := &file_historian_historian_proto_msgTypes[39]
+	mi := &file_historian_historian_proto_msgTypes[40]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2745,7 +2806,7 @@ func (x *GetMeasurementsByFilterRequest) String() string {
 func (*GetMeasurementsByFilterRequest) ProtoMessage() {}
 
 func (x *GetMeasurementsByFilterRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_historian_historian_proto_msgTypes[39]
+	mi := &file_historian_historian_proto_msgTypes[40]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2758,7 +2819,7 @@ func (x *GetMeasurementsByFilterRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetMeasurementsByFilterRequest.ProtoReflect.Descriptor instead.
 func (*GetMeasurementsByFilterRequest) Descriptor() ([]byte, []int) {
-	return file_historian_historian_proto_rawDescGZIP(), []int{39}
+	return file_historian_historian_proto_rawDescGZIP(), []int{40}
 }
 
 func (x *GetMeasurementsByFilterRequest) GetKeyword() string {
@@ -2831,6 +2892,13 @@ func (x *GetMeasurementsByFilterRequest) GetIncludeDependencies() bool {
 	return false
 }
 
+func (x *GetMeasurementsByFilterRequest) GetPagination() *Pagination {
+	if x != nil {
+		return x.Pagination
+	}
+	return nil
+}
+
 type GetCollectorsRequest struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Keyword       *string                `protobuf:"bytes,1,opt,name=keyword,proto3,oneof" json:"keyword,omitempty"`
@@ -2841,7 +2909,7 @@ type GetCollectorsRequest struct {
 
 func (x *GetCollectorsRequest) Reset() {
 	*x = GetCollectorsRequest{}
-	mi := &file_historian_historian_proto_msgTypes[40]
+	mi := &file_historian_historian_proto_msgTypes[41]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2853,7 +2921,7 @@ func (x *GetCollectorsRequest) String() string {
 func (*GetCollectorsRequest) ProtoMessage() {}
 
 func (x *GetCollectorsRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_historian_historian_proto_msgTypes[40]
+	mi := &file_historian_historian_proto_msgTypes[41]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2866,7 +2934,7 @@ func (x *GetCollectorsRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetCollectorsRequest.ProtoReflect.Descriptor instead.
 func (*GetCollectorsRequest) Descriptor() ([]byte, []int) {
-	return file_historian_historian_proto_rawDescGZIP(), []int{40}
+	return file_historian_historian_proto_rawDescGZIP(), []int{41}
 }
 
 func (x *GetCollectorsRequest) GetKeyword() string {
@@ -2892,7 +2960,7 @@ type Collectors struct {
 
 func (x *Collectors) Reset() {
 	*x = Collectors{}
-	mi := &file_historian_historian_proto_msgTypes[41]
+	mi := &file_historian_historian_proto_msgTypes[42]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2904,7 +2972,7 @@ func (x *Collectors) String() string {
 func (*Collectors) ProtoMessage() {}
 
 func (x *Collectors) ProtoReflect() protoreflect.Message {
-	mi := &file_historian_historian_proto_msgTypes[41]
+	mi := &file_historian_historian_proto_msgTypes[42]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2917,7 +2985,7 @@ func (x *Collectors) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use Collectors.ProtoReflect.Descriptor instead.
 func (*Collectors) Descriptor() ([]byte, []int) {
-	return file_historian_historian_proto_rawDescGZIP(), []int{41}
+	return file_historian_historian_proto_rawDescGZIP(), []int{42}
 }
 
 func (x *Collectors) GetCollectors() []*Collector {
@@ -2936,7 +3004,7 @@ type GetTimeseriesDatabasesRequest struct {
 
 func (x *GetTimeseriesDatabasesRequest) Reset() {
 	*x = GetTimeseriesDatabasesRequest{}
-	mi := &file_historian_historian_proto_msgTypes[42]
+	mi := &file_historian_historian_proto_msgTypes[43]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2948,7 +3016,7 @@ func (x *GetTimeseriesDatabasesRequest) String() string {
 func (*GetTimeseriesDatabasesRequest) ProtoMessage() {}
 
 func (x *GetTimeseriesDatabasesRequest) ProtoReflect() protoreflect.Message {
-	mi := &file_historian_historian_proto_msgTypes[42]
+	mi := &file_historian_historian_proto_msgTypes[43]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -2961,7 +3029,7 @@ func (x *GetTimeseriesDatabasesRequest) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use GetTimeseriesDatabasesRequest.ProtoReflect.Descriptor instead.
 func (*GetTimeseriesDatabasesRequest) Descriptor() ([]byte, []int) {
-	return file_historian_historian_proto_rawDescGZIP(), []int{42}
+	return file_historian_historian_proto_rawDescGZIP(), []int{43}
 }
 
 func (x *GetTimeseriesDatabasesRequest) GetKeyword() string {
@@ -2987,7 +3055,7 @@ type TimeseriesDatabase struct {
 
 func (x *TimeseriesDatabase) Reset() {
 	*x = TimeseriesDatabase{}
-	mi := &file_historian_historian_proto_msgTypes[43]
+	mi := &file_historian_historian_proto_msgTypes[44]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -2999,7 +3067,7 @@ func (x *TimeseriesDatabase) String() string {
 func (*TimeseriesDatabase) ProtoMessage() {}
 
 func (x *TimeseriesDatabase) ProtoReflect() protoreflect.Message {
-	mi := &file_historian_historian_proto_msgTypes[43]
+	mi := &file_historian_historian_proto_msgTypes[44]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3012,7 +3080,7 @@ func (x *TimeseriesDatabase) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TimeseriesDatabase.ProtoReflect.Descriptor instead.
 func (*TimeseriesDatabase) Descriptor() ([]byte, []int) {
-	return file_historian_historian_proto_rawDescGZIP(), []int{43}
+	return file_historian_historian_proto_rawDescGZIP(), []int{44}
 }
 
 func (x *TimeseriesDatabase) GetUuid() string {
@@ -3080,7 +3148,7 @@ type TimeseriesDatabases struct {
 
 func (x *TimeseriesDatabases) Reset() {
 	*x = TimeseriesDatabases{}
-	mi := &file_historian_historian_proto_msgTypes[44]
+	mi := &file_historian_historian_proto_msgTypes[45]
 	ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 	ms.StoreMessageInfo(mi)
 }
@@ -3092,7 +3160,7 @@ func (x *TimeseriesDatabases) String() string {
 func (*TimeseriesDatabases) ProtoMessage() {}
 
 func (x *TimeseriesDatabases) ProtoReflect() protoreflect.Message {
-	mi := &file_historian_historian_proto_msgTypes[44]
+	mi := &file_historian_historian_proto_msgTypes[45]
 	if x != nil {
 		ms := protoimpl.X.MessageStateOf(protoimpl.Pointer(x))
 		if ms.LoadMessageInfo() == nil {
@@ -3105,7 +3173,7 @@ func (x *TimeseriesDatabases) ProtoReflect() protoreflect.Message {
 
 // Deprecated: Use TimeseriesDatabases.ProtoReflect.Descriptor instead.
 func (*TimeseriesDatabases) Descriptor() ([]byte, []int) {
-	return file_historian_historian_proto_rawDescGZIP(), []int{44}
+	return file_historian_historian_proto_rawDescGZIP(), []int{45}
 }
 
 func (x *TimeseriesDatabases) GetTimeseriesDatabases() []*TimeseriesDatabase {
@@ -3372,7 +3440,15 @@ const file_historian_historian_proto_rawDesc = "" +
 	"\tupdatedAt\x18\n" +
 	" \x01(\v2\x1a.google.protobuf.TimestampR\tupdatedAt\"Q\n" +
 	"\x0fAssetProperties\x12>\n" +
-	"\x0fassetProperties\x18\x01 \x03(\v2\x14.proto.AssetPropertyR\x0fassetProperties\"\xe5\x03\n" +
+	"\x0fassetProperties\x18\x01 \x03(\v2\x14.proto.AssetPropertyR\x0fassetProperties\"{\n" +
+	"\n" +
+	"Pagination\x12\x19\n" +
+	"\x05limit\x18\x01 \x01(\x03H\x00R\x05limit\x88\x01\x01\x12\x1b\n" +
+	"\x06offset\x18\x02 \x01(\x03H\x01R\x06offset\x88\x01\x01\x12\x17\n" +
+	"\x04page\x18\x03 \x01(\x03H\x02R\x04page\x88\x01\x01B\b\n" +
+	"\x06_limitB\t\n" +
+	"\a_offsetB\a\n" +
+	"\x05_page\"\xac\x04\n" +
 	"\x1eGetMeasurementsByFilterRequest\x12\x1d\n" +
 	"\akeyword\x18\x01 \x01(\tH\x00R\akeyword\x88\x01\x01\x12\x1d\n" +
 	"\aquality\x18\x02 \x01(\tH\x01R\aquality\x88\x01\x01\x12\x1a\n" +
@@ -3384,7 +3460,10 @@ const file_historian_historian_proto_rawDesc = "" +
 	"\tdatatypes\x18\b \x03(\tR\tdatatypes\x125\n" +
 	"\x13excludeCalculations\x18\t \x01(\bH\x03R\x13excludeCalculations\x88\x01\x01\x125\n" +
 	"\x13includeDependencies\x18\n" +
-	" \x01(\bH\x04R\x13includeDependencies\x88\x01\x01B\n" +
+	" \x01(\bH\x04R\x13includeDependencies\x88\x01\x01\x126\n" +
+	"\n" +
+	"pagination\x18\v \x01(\v2\x11.proto.PaginationH\x05R\n" +
+	"pagination\x88\x01\x01B\n" +
 	"\n" +
 	"\b_keywordB\n" +
 	"\n" +
@@ -3392,7 +3471,8 @@ const file_historian_historian_proto_rawDesc = "" +
 	"\n" +
 	"_assetUUIDB\x16\n" +
 	"\x14_excludeCalculationsB\x16\n" +
-	"\x14_includeDependencies\"]\n" +
+	"\x14_includeDependenciesB\r\n" +
+	"\v_pagination\"]\n" +
 	"\x14GetCollectorsRequest\x12\x1d\n" +
 	"\akeyword\x18\x01 \x01(\tH\x00R\akeyword\x88\x01\x01\x12\x1a\n" +
 	"\bstatuses\x18\x02 \x03(\tR\bstatusesB\n" +
@@ -3457,7 +3537,7 @@ func file_historian_historian_proto_rawDescGZIP() []byte {
 }
 
 var file_historian_historian_proto_enumTypes = make([]protoimpl.EnumInfo, 1)
-var file_historian_historian_proto_msgTypes = make([]protoimpl.MessageInfo, 45)
+var file_historian_historian_proto_msgTypes = make([]protoimpl.MessageInfo, 46)
 var file_historian_historian_proto_goTypes = []any{
 	(Log_Level)(0),                         // 0: proto.Log.Level
 	(*CollectorHA)(nil),                    // 1: proto.CollectorHA
@@ -3499,123 +3579,125 @@ var file_historian_historian_proto_goTypes = []any{
 	(*GetAssetPropertiesRequest)(nil),      // 37: proto.GetAssetPropertiesRequest
 	(*AssetProperty)(nil),                  // 38: proto.AssetProperty
 	(*AssetProperties)(nil),                // 39: proto.AssetProperties
-	(*GetMeasurementsByFilterRequest)(nil), // 40: proto.GetMeasurementsByFilterRequest
-	(*GetCollectorsRequest)(nil),           // 41: proto.GetCollectorsRequest
-	(*Collectors)(nil),                     // 42: proto.Collectors
-	(*GetTimeseriesDatabasesRequest)(nil),  // 43: proto.GetTimeseriesDatabasesRequest
-	(*TimeseriesDatabase)(nil),             // 44: proto.TimeseriesDatabase
-	(*TimeseriesDatabases)(nil),            // 45: proto.TimeseriesDatabases
-	(*structpb.Struct)(nil),                // 46: google.protobuf.Struct
-	(*timestamppb.Timestamp)(nil),          // 47: google.protobuf.Timestamp
-	(*structpb.Value)(nil),                 // 48: google.protobuf.Value
-	(*emptypb.Empty)(nil),                  // 49: google.protobuf.Empty
+	(*Pagination)(nil),                     // 40: proto.Pagination
+	(*GetMeasurementsByFilterRequest)(nil), // 41: proto.GetMeasurementsByFilterRequest
+	(*GetCollectorsRequest)(nil),           // 42: proto.GetCollectorsRequest
+	(*Collectors)(nil),                     // 43: proto.Collectors
+	(*GetTimeseriesDatabasesRequest)(nil),  // 44: proto.GetTimeseriesDatabasesRequest
+	(*TimeseriesDatabase)(nil),             // 45: proto.TimeseriesDatabase
+	(*TimeseriesDatabases)(nil),            // 46: proto.TimeseriesDatabases
+	(*structpb.Struct)(nil),                // 47: google.protobuf.Struct
+	(*timestamppb.Timestamp)(nil),          // 48: google.protobuf.Timestamp
+	(*structpb.Value)(nil),                 // 49: google.protobuf.Value
+	(*emptypb.Empty)(nil),                  // 50: google.protobuf.Empty
 }
 var file_historian_historian_proto_depIdxs = []int32{
-	46, // 0: proto.Collector.settings:type_name -> google.protobuf.Struct
+	47, // 0: proto.Collector.settings:type_name -> google.protobuf.Struct
 	1,  // 1: proto.Collector.haSettings:type_name -> proto.CollectorHA
-	46, // 2: proto.Collector.state:type_name -> google.protobuf.Struct
-	46, // 3: proto.RegisterCollectorSchema.measurementSettingsSchema:type_name -> google.protobuf.Struct
-	46, // 4: proto.RegisterCollectorSchema.settingsSchema:type_name -> google.protobuf.Struct
-	47, // 5: proto.Point.timestamp:type_name -> google.protobuf.Timestamp
-	48, // 6: proto.Point.value:type_name -> google.protobuf.Value
-	46, // 7: proto.Point.tags:type_name -> google.protobuf.Struct
+	47, // 2: proto.Collector.state:type_name -> google.protobuf.Struct
+	47, // 3: proto.RegisterCollectorSchema.measurementSettingsSchema:type_name -> google.protobuf.Struct
+	47, // 4: proto.RegisterCollectorSchema.settingsSchema:type_name -> google.protobuf.Struct
+	48, // 5: proto.Point.timestamp:type_name -> google.protobuf.Timestamp
+	49, // 6: proto.Point.value:type_name -> google.protobuf.Value
+	47, // 7: proto.Point.tags:type_name -> google.protobuf.Struct
 	4,  // 8: proto.Points.points:type_name -> proto.Point
-	47, // 9: proto.Measurement.createdAt:type_name -> google.protobuf.Timestamp
-	47, // 10: proto.Measurement.updatedAt:type_name -> google.protobuf.Timestamp
-	46, // 11: proto.Measurement.settings:type_name -> google.protobuf.Struct
+	48, // 9: proto.Measurement.createdAt:type_name -> google.protobuf.Timestamp
+	48, // 10: proto.Measurement.updatedAt:type_name -> google.protobuf.Timestamp
+	47, // 11: proto.Measurement.settings:type_name -> google.protobuf.Struct
 	8,  // 12: proto.Measurement.engineeringSpecs:type_name -> proto.EngineeringSpecs
-	47, // 13: proto.MeasurementRequest.since:type_name -> google.protobuf.Timestamp
+	48, // 13: proto.MeasurementRequest.since:type_name -> google.protobuf.Timestamp
 	7,  // 14: proto.Measurements.measurements:type_name -> proto.Measurement
-	46, // 15: proto.Log.message:type_name -> google.protobuf.Struct
+	47, // 15: proto.Log.message:type_name -> google.protobuf.Struct
 	0,  // 16: proto.Log.level:type_name -> proto.Log.Level
-	47, // 17: proto.Log.timestamp:type_name -> google.protobuf.Timestamp
+	48, // 17: proto.Log.timestamp:type_name -> google.protobuf.Timestamp
 	11, // 18: proto.Logs.logs:type_name -> proto.Log
-	46, // 19: proto.Statistics.other:type_name -> google.protobuf.Struct
-	47, // 20: proto.Statistics.timestamp:type_name -> google.protobuf.Timestamp
-	46, // 21: proto.CreateMeasurement.attributes:type_name -> google.protobuf.Struct
-	46, // 22: proto.CreateMeasurement.settings:type_name -> google.protobuf.Struct
+	47, // 19: proto.Statistics.other:type_name -> google.protobuf.Struct
+	48, // 20: proto.Statistics.timestamp:type_name -> google.protobuf.Timestamp
+	47, // 21: proto.CreateMeasurement.attributes:type_name -> google.protobuf.Struct
+	47, // 22: proto.CreateMeasurement.settings:type_name -> google.protobuf.Struct
 	17, // 23: proto.CreateMeasurementsRequest.measurements:type_name -> proto.CreateMeasurement
-	46, // 24: proto.MigrateMeasurementSettings.settings:type_name -> google.protobuf.Struct
-	46, // 25: proto.MigrationRequest.settings:type_name -> google.protobuf.Struct
+	47, // 24: proto.MigrateMeasurementSettings.settings:type_name -> google.protobuf.Struct
+	47, // 25: proto.MigrationRequest.settings:type_name -> google.protobuf.Struct
 	21, // 26: proto.MigrationRequest.measurementSettings:type_name -> proto.MigrateMeasurementSettings
 	25, // 27: proto.HealthUpdates.healthUpdates:type_name -> proto.HealthUpdate
-	47, // 28: proto.HealthUpdate.timestamp:type_name -> google.protobuf.Timestamp
-	48, // 29: proto.ValueFilter.value:type_name -> google.protobuf.Value
-	48, // 30: proto.Aggregation.arguments:type_name -> google.protobuf.Value
+	48, // 28: proto.HealthUpdate.timestamp:type_name -> google.protobuf.Timestamp
+	49, // 29: proto.ValueFilter.value:type_name -> google.protobuf.Value
+	49, // 30: proto.Aggregation.arguments:type_name -> google.protobuf.Value
 	29, // 31: proto.QueryTimeseriesRequest.aggregation:type_name -> proto.Aggregation
 	27, // 32: proto.QueryTimeseriesRequest.measurements:type_name -> proto.MeasurementByName
-	47, // 33: proto.QueryTimeseriesRequest.start:type_name -> google.protobuf.Timestamp
-	47, // 34: proto.QueryTimeseriesRequest.end:type_name -> google.protobuf.Timestamp
-	46, // 35: proto.QueryTimeseriesRequest.tags:type_name -> google.protobuf.Struct
+	48, // 33: proto.QueryTimeseriesRequest.start:type_name -> google.protobuf.Timestamp
+	48, // 34: proto.QueryTimeseriesRequest.end:type_name -> google.protobuf.Timestamp
+	47, // 35: proto.QueryTimeseriesRequest.tags:type_name -> google.protobuf.Struct
 	28, // 36: proto.QueryTimeseriesRequest.valueFilters:type_name -> proto.ValueFilter
-	48, // 37: proto.SeriesPoint.value:type_name -> google.protobuf.Value
-	46, // 38: proto.Series.tags:type_name -> google.protobuf.Struct
+	49, // 37: proto.SeriesPoint.value:type_name -> google.protobuf.Value
+	47, // 38: proto.Series.tags:type_name -> google.protobuf.Struct
 	31, // 39: proto.Series.dataPoints:type_name -> proto.SeriesPoint
 	32, // 40: proto.QueryTimeseriesResponse.series:type_name -> proto.Series
-	46, // 41: proto.QueryTimeseriesResponse.attributes:type_name -> google.protobuf.Struct
-	46, // 42: proto.Asset.attributes:type_name -> google.protobuf.Struct
-	46, // 43: proto.Asset.metadata:type_name -> google.protobuf.Struct
-	47, // 44: proto.Asset.createdAt:type_name -> google.protobuf.Timestamp
-	47, // 45: proto.Asset.updatedAt:type_name -> google.protobuf.Timestamp
+	47, // 41: proto.QueryTimeseriesResponse.attributes:type_name -> google.protobuf.Struct
+	47, // 42: proto.Asset.attributes:type_name -> google.protobuf.Struct
+	47, // 43: proto.Asset.metadata:type_name -> google.protobuf.Struct
+	48, // 44: proto.Asset.createdAt:type_name -> google.protobuf.Timestamp
+	48, // 45: proto.Asset.updatedAt:type_name -> google.protobuf.Timestamp
 	35, // 46: proto.Assets.assets:type_name -> proto.Asset
-	46, // 47: proto.AssetProperty.attributes:type_name -> google.protobuf.Struct
-	46, // 48: proto.AssetProperty.metadata:type_name -> google.protobuf.Struct
-	47, // 49: proto.AssetProperty.createdAt:type_name -> google.protobuf.Timestamp
-	47, // 50: proto.AssetProperty.updatedAt:type_name -> google.protobuf.Timestamp
+	47, // 47: proto.AssetProperty.attributes:type_name -> google.protobuf.Struct
+	47, // 48: proto.AssetProperty.metadata:type_name -> google.protobuf.Struct
+	48, // 49: proto.AssetProperty.createdAt:type_name -> google.protobuf.Timestamp
+	48, // 50: proto.AssetProperty.updatedAt:type_name -> google.protobuf.Timestamp
 	38, // 51: proto.AssetProperties.assetProperties:type_name -> proto.AssetProperty
-	2,  // 52: proto.Collectors.collectors:type_name -> proto.Collector
-	46, // 53: proto.TimeseriesDatabase.attributes:type_name -> google.protobuf.Struct
-	46, // 54: proto.TimeseriesDatabase.metadata:type_name -> google.protobuf.Struct
-	47, // 55: proto.TimeseriesDatabase.createdAt:type_name -> google.protobuf.Timestamp
-	47, // 56: proto.TimeseriesDatabase.updatedAt:type_name -> google.protobuf.Timestamp
-	44, // 57: proto.TimeseriesDatabases.timeseriesDatabases:type_name -> proto.TimeseriesDatabase
-	49, // 58: proto.Historian.GetCollector:input_type -> google.protobuf.Empty
-	3,  // 59: proto.Historian.RegisterCollector:input_type -> proto.RegisterCollectorSchema
-	5,  // 60: proto.Historian.CreatePointsStream:input_type -> proto.Points
-	5,  // 61: proto.Historian.CreatePoints:input_type -> proto.Points
-	9,  // 62: proto.Historian.GetMeasurements:input_type -> proto.MeasurementRequest
-	18, // 63: proto.Historian.CreateMeasurements:input_type -> proto.CreateMeasurementsRequest
-	12, // 64: proto.Historian.CreateLogsStream:input_type -> proto.Logs
-	12, // 65: proto.Historian.CreateLogs:input_type -> proto.Logs
-	14, // 66: proto.Historian.CreateStatisticsStream:input_type -> proto.Statistics
-	14, // 67: proto.Historian.CreateStatistics:input_type -> proto.Statistics
-	19, // 68: proto.Historian.GetCollectorUpdate:input_type -> proto.CollectorUpdateMetadata
-	46, // 69: proto.Historian.UpdateCollectorState:input_type -> google.protobuf.Struct
-	24, // 70: proto.Historian.UpdateHealth:input_type -> proto.HealthUpdates
-	22, // 71: proto.Historian.MigrateSettings:input_type -> proto.MigrationRequest
-	49, // 72: proto.Historian.GetInfo:input_type -> google.protobuf.Empty
-	30, // 73: proto.Historian.QueryTimeseries:input_type -> proto.QueryTimeseriesRequest
-	34, // 74: proto.Historian.GetAssets:input_type -> proto.GetAssetsRequest
-	37, // 75: proto.Historian.GetAssetProperties:input_type -> proto.GetAssetPropertiesRequest
-	40, // 76: proto.Historian.GetMeasurementsByFilter:input_type -> proto.GetMeasurementsByFilterRequest
-	41, // 77: proto.Historian.GetCollectors:input_type -> proto.GetCollectorsRequest
-	43, // 78: proto.Historian.GetTimeseriesDatabases:input_type -> proto.GetTimeseriesDatabasesRequest
-	2,  // 79: proto.Historian.GetCollector:output_type -> proto.Collector
-	2,  // 80: proto.Historian.RegisterCollector:output_type -> proto.Collector
-	6,  // 81: proto.Historian.CreatePointsStream:output_type -> proto.CreatePointsReply
-	6,  // 82: proto.Historian.CreatePoints:output_type -> proto.CreatePointsReply
-	10, // 83: proto.Historian.GetMeasurements:output_type -> proto.Measurements
-	16, // 84: proto.Historian.CreateMeasurements:output_type -> proto.CreateMeasurementsReply
-	13, // 85: proto.Historian.CreateLogsStream:output_type -> proto.CreateLogsReply
-	13, // 86: proto.Historian.CreateLogs:output_type -> proto.CreateLogsReply
-	15, // 87: proto.Historian.CreateStatisticsStream:output_type -> proto.CreateStatisticsReply
-	15, // 88: proto.Historian.CreateStatistics:output_type -> proto.CreateStatisticsReply
-	20, // 89: proto.Historian.GetCollectorUpdate:output_type -> proto.File
-	49, // 90: proto.Historian.UpdateCollectorState:output_type -> google.protobuf.Empty
-	26, // 91: proto.Historian.UpdateHealth:output_type -> proto.HealthUpdateReply
-	49, // 92: proto.Historian.MigrateSettings:output_type -> google.protobuf.Empty
-	23, // 93: proto.Historian.GetInfo:output_type -> proto.HistorianInfo
-	33, // 94: proto.Historian.QueryTimeseries:output_type -> proto.QueryTimeseriesResponse
-	36, // 95: proto.Historian.GetAssets:output_type -> proto.Assets
-	39, // 96: proto.Historian.GetAssetProperties:output_type -> proto.AssetProperties
-	10, // 97: proto.Historian.GetMeasurementsByFilter:output_type -> proto.Measurements
-	42, // 98: proto.Historian.GetCollectors:output_type -> proto.Collectors
-	45, // 99: proto.Historian.GetTimeseriesDatabases:output_type -> proto.TimeseriesDatabases
-	79, // [79:100] is the sub-list for method output_type
-	58, // [58:79] is the sub-list for method input_type
-	58, // [58:58] is the sub-list for extension type_name
-	58, // [58:58] is the sub-list for extension extendee
-	0,  // [0:58] is the sub-list for field type_name
+	40, // 52: proto.GetMeasurementsByFilterRequest.pagination:type_name -> proto.Pagination
+	2,  // 53: proto.Collectors.collectors:type_name -> proto.Collector
+	47, // 54: proto.TimeseriesDatabase.attributes:type_name -> google.protobuf.Struct
+	47, // 55: proto.TimeseriesDatabase.metadata:type_name -> google.protobuf.Struct
+	48, // 56: proto.TimeseriesDatabase.createdAt:type_name -> google.protobuf.Timestamp
+	48, // 57: proto.TimeseriesDatabase.updatedAt:type_name -> google.protobuf.Timestamp
+	45, // 58: proto.TimeseriesDatabases.timeseriesDatabases:type_name -> proto.TimeseriesDatabase
+	50, // 59: proto.Historian.GetCollector:input_type -> google.protobuf.Empty
+	3,  // 60: proto.Historian.RegisterCollector:input_type -> proto.RegisterCollectorSchema
+	5,  // 61: proto.Historian.CreatePointsStream:input_type -> proto.Points
+	5,  // 62: proto.Historian.CreatePoints:input_type -> proto.Points
+	9,  // 63: proto.Historian.GetMeasurements:input_type -> proto.MeasurementRequest
+	18, // 64: proto.Historian.CreateMeasurements:input_type -> proto.CreateMeasurementsRequest
+	12, // 65: proto.Historian.CreateLogsStream:input_type -> proto.Logs
+	12, // 66: proto.Historian.CreateLogs:input_type -> proto.Logs
+	14, // 67: proto.Historian.CreateStatisticsStream:input_type -> proto.Statistics
+	14, // 68: proto.Historian.CreateStatistics:input_type -> proto.Statistics
+	19, // 69: proto.Historian.GetCollectorUpdate:input_type -> proto.CollectorUpdateMetadata
+	47, // 70: proto.Historian.UpdateCollectorState:input_type -> google.protobuf.Struct
+	24, // 71: proto.Historian.UpdateHealth:input_type -> proto.HealthUpdates
+	22, // 72: proto.Historian.MigrateSettings:input_type -> proto.MigrationRequest
+	50, // 73: proto.Historian.GetInfo:input_type -> google.protobuf.Empty
+	30, // 74: proto.Historian.QueryTimeseries:input_type -> proto.QueryTimeseriesRequest
+	34, // 75: proto.Historian.GetAssets:input_type -> proto.GetAssetsRequest
+	37, // 76: proto.Historian.GetAssetProperties:input_type -> proto.GetAssetPropertiesRequest
+	41, // 77: proto.Historian.GetMeasurementsByFilter:input_type -> proto.GetMeasurementsByFilterRequest
+	42, // 78: proto.Historian.GetCollectors:input_type -> proto.GetCollectorsRequest
+	44, // 79: proto.Historian.GetTimeseriesDatabases:input_type -> proto.GetTimeseriesDatabasesRequest
+	2,  // 80: proto.Historian.GetCollector:output_type -> proto.Collector
+	2,  // 81: proto.Historian.RegisterCollector:output_type -> proto.Collector
+	6,  // 82: proto.Historian.CreatePointsStream:output_type -> proto.CreatePointsReply
+	6,  // 83: proto.Historian.CreatePoints:output_type -> proto.CreatePointsReply
+	10, // 84: proto.Historian.GetMeasurements:output_type -> proto.Measurements
+	16, // 85: proto.Historian.CreateMeasurements:output_type -> proto.CreateMeasurementsReply
+	13, // 86: proto.Historian.CreateLogsStream:output_type -> proto.CreateLogsReply
+	13, // 87: proto.Historian.CreateLogs:output_type -> proto.CreateLogsReply
+	15, // 88: proto.Historian.CreateStatisticsStream:output_type -> proto.CreateStatisticsReply
+	15, // 89: proto.Historian.CreateStatistics:output_type -> proto.CreateStatisticsReply
+	20, // 90: proto.Historian.GetCollectorUpdate:output_type -> proto.File
+	50, // 91: proto.Historian.UpdateCollectorState:output_type -> google.protobuf.Empty
+	26, // 92: proto.Historian.UpdateHealth:output_type -> proto.HealthUpdateReply
+	50, // 93: proto.Historian.MigrateSettings:output_type -> google.protobuf.Empty
+	23, // 94: proto.Historian.GetInfo:output_type -> proto.HistorianInfo
+	33, // 95: proto.Historian.QueryTimeseries:output_type -> proto.QueryTimeseriesResponse
+	36, // 96: proto.Historian.GetAssets:output_type -> proto.Assets
+	39, // 97: proto.Historian.GetAssetProperties:output_type -> proto.AssetProperties
+	10, // 98: proto.Historian.GetMeasurementsByFilter:output_type -> proto.Measurements
+	43, // 99: proto.Historian.GetCollectors:output_type -> proto.Collectors
+	46, // 100: proto.Historian.GetTimeseriesDatabases:output_type -> proto.TimeseriesDatabases
+	80, // [80:101] is the sub-list for method output_type
+	59, // [59:80] is the sub-list for method input_type
+	59, // [59:59] is the sub-list for extension type_name
+	59, // [59:59] is the sub-list for extension extendee
+	0,  // [0:59] is the sub-list for field type_name
 }
 
 func init() { file_historian_historian_proto_init() }
@@ -3633,14 +3715,15 @@ func file_historian_historian_proto_init() {
 	file_historian_historian_proto_msgTypes[36].OneofWrappers = []any{}
 	file_historian_historian_proto_msgTypes[39].OneofWrappers = []any{}
 	file_historian_historian_proto_msgTypes[40].OneofWrappers = []any{}
-	file_historian_historian_proto_msgTypes[42].OneofWrappers = []any{}
+	file_historian_historian_proto_msgTypes[41].OneofWrappers = []any{}
+	file_historian_historian_proto_msgTypes[43].OneofWrappers = []any{}
 	type x struct{}
 	out := protoimpl.TypeBuilder{
 		File: protoimpl.DescBuilder{
 			GoPackagePath: reflect.TypeOf(x{}).PkgPath(),
 			RawDescriptor: unsafe.Slice(unsafe.StringData(file_historian_historian_proto_rawDesc), len(file_historian_historian_proto_rawDesc)),
 			NumEnums:      1,
-			NumMessages:   45,
+			NumMessages:   46,
 			NumExtensions: 0,
 			NumServices:   1,
 		},
