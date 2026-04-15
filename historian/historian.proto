@@ -189,6 +189,7 @@ message CreateMeasurement {
   bool autoOnboard = 4;
   optional google.protobuf.Struct attributes = 5;
   optional google.protobuf.Struct settings = 6;
+  optional google.protobuf.Struct metadata = 7;
 }
 
 message CreateMeasurementsRequest {
