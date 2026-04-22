@@ -3653,7 +3653,7 @@ const file_historian_historian_proto_rawDesc = "" +
 	"\x12GetAssetProperties\x12 .proto.GetAssetPropertiesRequest\x1a\x16.proto.AssetProperties\x12U\n" +
 	"\x17GetMeasurementsByFilter\x12%.proto.GetMeasurementsByFilterRequest\x1a\x13.proto.Measurements\x12?\n" +
 	"\rGetCollectors\x12\x1b.proto.GetCollectorsRequest\x1a\x11.proto.Collectors\x12Z\n" +
-	"\x16GetTimeseriesDatabases\x12$.proto.GetTimeseriesDatabasesRequest\x1a\x1a.proto.TimeseriesDatabasesB;Z9github.com/factrylabs/historian-proto/historian;historianb\x06proto3"
+	"\x16GetTimeseriesDatabases\x12$.proto.GetTimeseriesDatabasesRequest\x1a\x1a.proto.TimeseriesDatabasesB>Z<github.com/factrylabs/historian-proto/v2/historian;historianb\x06proto3"
 
 var (
 	file_historian_historian_proto_rawDescOnce sync.Once

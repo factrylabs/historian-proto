@@ -1,4 +1,4 @@
-module github.com/factrylabs/historian-proto
+module github.com/factrylabs/historian-proto/v2
 
 go 1.20
 
