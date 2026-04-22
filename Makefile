@@ -1,5 +1,5 @@
-major = 1
-minor = 8
+major = 2
+minor = 0
 patch = 0
 
 PROTO_DIR= .
