@@ -1,5 +1,10 @@
 # Changelog
 
+## v2.1.0
+
+- Added `name` field to `Collector`.
+- Added `collectorUUID` field to `Measurement`.
+
 ## v2.0.0
 
 ### Breaking changes

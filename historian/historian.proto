@@ -70,6 +70,7 @@ message Collector {
   bool updateAvailable=10;
   string updateToVersion=11;
   google.protobuf.Struct state = 12;
+  string name = 13;
 }
 
 message RegisterCollectorSchema {
@@ -107,6 +108,8 @@ message Measurement {
   google.protobuf.Struct settings = 6;
   string datatype = 7;
   EngineeringSpecs engineeringSpecs = 8;
+  map<string, MetadataProperty> metadata = 9;
+  string collectorUUID = 10;
 }
 
 message EngineeringSpecs {
