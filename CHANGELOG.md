@@ -1,5 +1,12 @@
 # Changelog
 
+## v2.1.0
+
+- Added `name` field to `Collector`.
+- Added `collectorUUID` field to `Measurement`.
+- Added `metadata` field to `Measurement`.
+- Added `total` field to `Measurements` to carry the total count for paginated `GetMeasurementsByFilter` responses.
+
 ## v2.0.0
 
 ### Breaking changes
