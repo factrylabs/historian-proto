@@ -137,6 +137,7 @@ message MeasurementRequest {
 
 message Measurements {
   repeated Measurement measurements = 1;
+  int64 total = 2; // total number of measurements matching the filter, ignoring pagination
 }
 
 message Log {
