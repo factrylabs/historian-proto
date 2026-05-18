@@ -892,6 +892,7 @@ func (x *MeasurementRequest) GetCollectorUUID() string {
 type Measurements struct {
 	state         protoimpl.MessageState `protogen:"open.v1"`
 	Measurements  []*Measurement         `protobuf:"bytes,1,rep,name=measurements,proto3" json:"measurements,omitempty"`
+	Total         int64                  `protobuf:"varint,2,opt,name=total,proto3" json:"total,omitempty"` // total number of measurements matching the filter, ignoring pagination
 	unknownFields protoimpl.UnknownFields
 	sizeCache     protoimpl.SizeCache
 }
@@ -931,6 +932,13 @@ func (x *Measurements) GetMeasurements() []*Measurement {
 		return x.Measurements
 	}
 	return nil
+}
+
+func (x *Measurements) GetTotal() int64 {
+	if x != nil {
+		return x.Total
+	}
+	return 0
 }
 
 type Log struct {
@@ -3401,9 +3409,10 @@ const file_historian_historian_proto_rawDesc = "" +
 	"\aBOOLEAN\x10\x02\"l\n" +
 	"\x12MeasurementRequest\x120\n" +
 	"\x05since\x18\x01 \x01(\v2\x1a.google.protobuf.TimestampR\x05since\x12$\n" +
-	"\rcollectorUUID\x18\x02 \x01(\tR\rcollectorUUID\"F\n" +
+	"\rcollectorUUID\x18\x02 \x01(\tR\rcollectorUUID\"\\\n" +
 	"\fMeasurements\x126\n" +
-	"\fmeasurements\x18\x01 \x03(\v2\x12.proto.MeasurementR\fmeasurements\"\xb7\x02\n" +
+	"\fmeasurements\x18\x01 \x03(\v2\x12.proto.MeasurementR\fmeasurements\x12\x14\n" +
+	"\x05total\x18\x02 \x01(\x03R\x05total\"\xb7\x02\n" +
 	"\x03Log\x121\n" +
 	"\amessage\x18\x01 \x01(\v2\x17.google.protobuf.StructR\amessage\x12&\n" +
 	"\x05level\x18\x02 \x01(\x0e2\x10.proto.Log.LevelR\x05level\x128\n" +
